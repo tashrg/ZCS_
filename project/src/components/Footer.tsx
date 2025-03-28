@@ -81,7 +81,7 @@ export const Footer = () => {
         </div>
 
         {/* Quick Links (Centered) */}
-        <div className="mt-6 flex flex-col items-start text-left mx-auto">
+          <div className="mt-6 flex-col items-start mx-auto">
           <h3 className="text-[#032854] font-bold mb-4">Quick Links</h3>
           <ul className="space-y-3">
             <li>
