@@ -1,32 +1,17 @@
 "use client";
-import Logo from "@/assets/ZCSName.png";
+import Logo from "@/assets/ZCSLogo.png";
 import Image from "next/image";
 import Link from "next/link";
 import MenuIcon from "@/assets/menu.svg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (!isMenuOpen) {
-        setIsVisible(currentScrollY < lastScrollY || currentScrollY < 50);
-      }
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, isMenuOpen]);
 
   const menuVariants = {
     hidden: { opacity: 0, y: -50 },
@@ -47,13 +32,28 @@ export const Header = () => {
   };
 
   return (
-    <header className={`sticky top-0 bg-white/10 backdrop-blur-xl z-50 w-full transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
-      <div className={`py-4 ${isMenuOpen ? "bg-white/10 backdrop-blur-4xl" : ""}`}>
+    <header className="sticky top-0 w-full bg-gradient-to-r from-[#dadee2]/30 to-[#a6c2dd]/30 backdrop-blur-xl shadow-md z-50">
+      <div className="py-4">
         <div className="flex items-center justify-between px-6">
-          <Link href="/">
-            <Image src={Logo} alt="ZCS Name" height={80} width={80} className="cursor-pointer" />
-          </Link>
+          {/* LOGO + TEXT CONTAINER */}
+          <div className="flex items-center gap-3">
+            <Link href="/">
+              <Image src={Logo} alt="ZCS Logo" height={60} width={45} className="cursor-pointer" />
+            </Link>
+            <div className="flex flex-col font-bold font-montserrat text-sm leading-tight">
+              <div>
+                <span className="text-[#2297F5]">ZENITH C</span>
+                <span className="text-[#F8CD23]">O</span>
+                <span className="text-[#2297F5]">RE</span>
+              </div>
+              <span className="text-[#2297F5]">SOLUTIONS</span>
+            </div>
+          </div>
+
+          {/* MENU ICON FOR MOBILE */}
           <MenuIcon className="h-8 w-8 md:hidden cursor-pointer" onClick={toggleMenu} />
+
+          {/* NAVIGATION LINKS */}
           <nav className="hidden md:flex gap-10 text-[#032854] items-center text-sm font-montserrat">
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
@@ -61,6 +61,8 @@ export const Header = () => {
             <Link href="/#contact">Contact</Link>
           </nav>
         </div>
+
+        {/* MOBILE MENU */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
