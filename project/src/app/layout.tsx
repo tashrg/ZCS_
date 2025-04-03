@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat, Open_Sans } from "next/font/google"; // Import Montserrat and Open Sans
 import "./globals.css";
 import { twMerge } from "tailwind-merge";
+import BackgroundMusic from "@/components/BackgroundMusic";
+import ScrollToTopButton from "@/components/ScrollToTop";
 
 // Load Montserrat and Open Sans fonts
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat" });
@@ -22,6 +24,8 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" type="image/png" />
       </head>
       <body className={twMerge("antialiased bg-[#EAEEFE]", montserrat.className)}>
+        <BackgroundMusic /> {/* Music should only be here */}
+        <ScrollToTopButton /> 
         {children}
       </body>
     </html>
