@@ -1,7 +1,7 @@
-"use client"; 
+"use client";  
 import Link from "next/link"; 
-import { motion, useScroll, useTransform } from "framer-motion"; 
-import { useRef } from "react"; 
+import { motion, useAnimation } from "framer-motion"; 
+import { useEffect } from "react"; 
 import Image from "next/image"; 
 import Logo from "@/assets/ZCSLogo1.gif";
 
@@ -11,22 +11,33 @@ const textVariants = {
 };
 
 export const Dashboard = () => { 
-  const dashRef = useRef(null); 
-  const { scrollYProgress } = useScroll({ 
-    target: dashRef, 
-    offset: ["start end", "end start"], 
-  });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    // Trigger the wipe animation when the component mounts (on page load)
+    controls.start({ width: "100%", transition: { duration: 1.5, ease: "easeOut" } }); // Faster animation
+  }, [controls]);
 
   return ( 
     <section
       id="home"
-      ref={dashRef}
-      className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] overflow-hidden"
+      className="relative bg-radial-blue-gradient bg-gradient-to-r overflow-hidden"
     > 
-      {/* Layered Background Cover */} 
-      <div className="absolute inset-0 bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] z-10"></div>  
+      {/* Wipe effect for background color, from left to right */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] z-10"
+        initial={{ width: "0%" }}  // Start with no width (hidden)
+        animate={controls}         // Animate to full width (100%)
+        style={{
+          background: "linear-gradient(to right, #a6c2dd, #b7ccdd)", // Light-to-dark gradient
+          position: "absolute",
+          top: 0,
+          left: 0,
+          height: "100%",
+        }}
+      ></motion.div>
 
-      <div className="container h-full flex flex-col md:flex-row items-center justify-center px-4 md:px-8 relative z-20">
+      <div className="container h-[550px] flex flex-col md:flex-row items-center justify-center px-4 md:px-8 relative z-20">
         
         {/* GIF Logo container - Moving the logo further to the left */}
         <div className="w-full flex items-center justify-center order-1 md:order-1 mb-8 md:mb-0 md:ml-[-250px]">

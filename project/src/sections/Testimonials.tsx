@@ -1,4 +1,8 @@
-"use client";
+"use client"; 
+import { useState, useRef } from "react";
+import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+
 import avatar1 from "@/assets/User.png";
 import avatar2 from "@/assets/User.png";
 import avatar3 from "@/assets/User.png";
@@ -8,9 +12,6 @@ import avatar6 from "@/assets/User.png";
 import avatar7 from "@/assets/User.png";
 import avatar8 from "@/assets/User.png";
 import avatar9 from "@/assets/User.png";
-import Image from "next/image";
-import { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion"; // Import framer-motion
 
 const testimonials = [
   {
@@ -71,7 +72,7 @@ const testimonials = [
 
 export const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [fadeKey, setFadeKey] = useState(0); // Key to trigger re-render for page-turn effect
+  const [fadeKey, setFadeKey] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -79,23 +80,28 @@ export const Testimonials = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
     );
-    setFadeKey((prevKey) => prevKey + 1); // Update key to trigger page-turn effect
+    setFadeKey((prevKey) => prevKey + 1); // Trigger re-render for page-turn effect
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
     );
-    setFadeKey((prevKey) => prevKey + 1); // Update key to trigger page-turn effect
+    setFadeKey((prevKey) => prevKey + 1); // Trigger re-render for page-turn effect
   };
 
   const { text, imageSrc, name, role } = testimonials[currentIndex];
 
   return (
-    <section className="min-h-screen pt-2 pb-14 md:pt-0 md:pb-8 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE,_100%)] overflow-hidden">
+    <section className="min-h-[400px] sm:min-h-[550px] lg:min-h-[580px] xl:min-h-[750px] pt-20 pb-12 md:pt-12 md:pb-12 relative bg-gradient-to-r from-[#ffffff]/30 to-[#ffffff] overflow-hidden">
       <div className="container mx-auto flex flex-col md:flex-row-reverse items-center justify-between gap-10 relative">
         {/* Title Section */}
-        <div className="order-1 md:order-none text-center md:text-left">
+        <motion.div
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="order-1 md:order-none text-center md:text-left"
+        >
           <div className="tag text-[#032854] font-bold uppercase font-montserrat">Testimonials</div>
           <h2 className="section-title mt-5 text-6xl font-montserrat font-bold text-[#032854] flex flex-col items-start">
             <span>What Client</span>
@@ -106,17 +112,17 @@ export const Testimonials = () => {
               </span>
             </div>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Testimonial Card */}
         <motion.div
-          key={fadeKey} // Use key to trigger re-render for page-turn effect
+          key={fadeKey}
           ref={ref}
           className="order-2 md:order-none bg-[#032854] text-white p-8 rounded-lg shadow-lg max-w-lg flex flex-col justify-between relative mt-6"
-          initial={{ opacity: 0, rotateY: 90 }} // Start rotated like a closing page
-          animate={{ opacity: 1, rotateY: 0 }} // Rotate to the front like an opening page
-          exit={{ opacity: 0, rotateY: -90 }} // Rotate away like a closing page
-          transition={{ duration: 0.8, ease: "easeInOut" }} // Smooth page-turn effect
+          initial={{ opacity: 0, rotateY: 90 }}
+          animate={{ opacity: 1, rotateY: 0 }}
+          exit={{ opacity: 0, rotateY: -90 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
         >
           <div className="text-5xl font-bold font-openSans">❜❜</div>
           <div className="text-xl leading-relaxed font-light font-openSans">{text}</div>

@@ -1,12 +1,12 @@
-"use client";
+"use client"; 
 import React from 'react';
 import { motion } from 'framer-motion';
 import aboutBg from "@/assets/ch-main.png";
 
 export const AboutUs: React.FC = () => {
   return (
-    <div className="min-h-screen pt-1 pb-14 md:pt-0 md:pb-8 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE,_100%)] overflow-hidden">
-      <div className="min-h-screen flex flex-col items-center justify-start py-10">
+    <div className="h-auto pt-1 pb-14 md:pt-0 md:pb-8 bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] overflow-hidden">
+      <div className="flex flex-col items-center justify-start py-10">
         <motion.h1 
           className="section-title mt-1 text-6xl font-montserrat font-bold text-[#032854]"
           initial={{ opacity: 0, y: 50 }} // Start invisible and below
@@ -53,7 +53,7 @@ export const AboutUs: React.FC = () => {
             >
               <h2 className="text-2xl font-semibold mb-2">Mission</h2>
               <p className="text-base leading-relaxed">
-              Our mission is to empower Philippine businesses, starting with
+                Our mission is to empower Philippine businesses, starting with
                 SMEs and startups, by providing top-tier custom software
                 solutions that optimize operations, drive growth, and achieve
                 unique goals. Globally, we create career opportunities,
@@ -70,7 +70,7 @@ export const AboutUs: React.FC = () => {
             >
               <h2 className="text-2xl font-semibold mb-2">Vision</h2>
               <p className="text-base leading-relaxed">
-              Our vision is to be a world-class leader in custom software
+                Our vision is to be a world-class leader in custom software
                 development, recognized in the Philippines and globally. As the
                 preferred technology partner, we drive innovation, sustainable
                 growth, and set new standards for impactful, client-centered

@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -13,7 +13,7 @@ import SocialYoutube from "@/assets/social-yt.svg";
 export const Footer = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const [bgColor, setBgColor] = useState("bg-gradient-to-t from-[#183EC2] to-[#EAEEFE]");
+  const [bgColor, setBgColor] = useState("bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd]");
 
   // Function to handle smooth scrolling or navigation
   const handleNavigation = (path: string, sectionId: string) => {
@@ -32,9 +32,9 @@ export const Footer = () => {
       const windowHeight = window.innerHeight;
 
       if (scrollY + windowHeight >= footerOffset - 100) {
-        setBgColor("bg-gradient-to-t from-[#183EC2] to-[#EAEEFE]"); // Blending from dark blue to light blue
+        setBgColor("bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd]"); // Apply the same gradient
       } else {
-        setBgColor("bg-gradient-to-t from-[#0F1B61] to-[#183EC2]"); // Darker blue to slightly lighter blue
+        setBgColor("bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd]"); // Keep the same gradient
       }
     };
 
@@ -76,12 +76,11 @@ export const Footer = () => {
                 463 Damayan Navarro, General Trias, Cavite
               </a>
             </li>
-
           </ul>
         </div>
 
         {/* Quick Links (Centered) */}
-          <div className="mt-6 flex-col items-start mx-auto">
+        <div className="mt-6 flex-col items-start mx-auto">
           <h3 className="text-[#032854] font-bold mb-4">Quick Links</h3>
           <ul className="space-y-3">
             <li>

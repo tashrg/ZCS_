@@ -15,7 +15,7 @@ const logos = [
 
 export const LogoTicker = () => {
   return (
-    <div className="py-8 md:py-12 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE,_100%)] overflow-hidden relative">
+    <div className="py-15 md:py-20 relative bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] overflow-hidden">
       <div className="flex w-max">
         {/* Masking effect: Keeps center visible while sides fade */}
         <div className="flex overflow-hidden absolute inset-0 w-full [mask-image:linear-gradient(to_right,rgba(0,0,0,0),rgba(0,0,0,1)_40%,rgba(0,0,0,1)_60%,rgba(0,0,0,0))]">

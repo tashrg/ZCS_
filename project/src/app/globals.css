@@ -71,5 +71,26 @@
   }
   .bg-radial-blue-gradient {
     background: radial-gradient(ellipse 200% 100% at bottom left, #183EC2, #EAEEFE 100%);
+    /* Adding flex properties and padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;  /* pt-8 equivalent */
+    padding-bottom: 2rem;  /* pb-8 equivalent */
   }
+  
+  @media (min-width: 768px) {
+    .bg-radial-blue-gradient {
+      padding-top: 3rem;  /* md:pt-12 equivalent */
+      padding-bottom: 3rem;  /* md:pb-12 equivalent */
+    }
+  }
+  
+  .bg-gradient-to-r {
+    background: linear-gradient(to right, rgba(166, 194, 221, 0.3), rgba(183, 204, 221, 1));
+  }
+  
+  .overflow-hidden {
+    overflow: hidden;
+  }  
 }

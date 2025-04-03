@@ -34,14 +34,14 @@ export const Services = () => {
   ];
 
   return (
-    <section id="services" className="pt-8 pb-16 md:pt-10 md:pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE,_100%)] overflow-hidden">
-      <div className="container">
+    <section id="services" className="bg-radial-blue-gradient bg-gradient-to-r overflow-hidden from-[#ffffff]/30 to-[#ffffff] relative">
+      <div className="container relative z-10">
         <motion.h2
-          initial={{ opacity: 0, x: -50 }}
+          initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="section-title mt-5 text-6xl font-montserrat font-bold text-[#2297F5]"
+          className="section-title mt-2 text-6xl font-montserrat font-bold text-[#2297F5]"
         >
           Our Services
         </motion.h2>
@@ -53,13 +53,21 @@ export const Services = () => {
           className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center mt-12"
         >
           {services.map((service, index) => (
-            <FlipCard
+            <motion.div
               key={index}
-              frontText={service.frontText}
-              backText={service.backText}
-              onClick={service.onClick}
-              className={index === services.length - 1 ? "md:col-span-3" : ""}
-            />
+              initial={{ opacity: 0, x: 100 }}  // Start from the right
+              whileInView={{ opacity: 1, x: 0 }} // Wipe from right to left
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+              className={service.frontText === "Agentic AI (Coming Soon)" ? "md:col-start-2" : ""}  // Align Agentic AI with second column
+            >
+              <FlipCard
+                frontText={service.frontText}
+                backText={service.backText}
+                onClick={service.onClick}
+                className={index === services.length - 1 ? "md:col-span-3" : ""}
+              />
+            </motion.div>
           ))}
         </motion.div>
 

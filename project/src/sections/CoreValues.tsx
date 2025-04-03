@@ -1,11 +1,11 @@
-"use client";
+"use client"; 
 import React from "react";
 import { motion } from "framer-motion";
 
 export const CoreValues: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE,_100%)] overflow-hidden relative">
-      <div className="min-h-screen flex flex-col items-center justify-start py-10">
+    <div className="h-auto flex flex-col items-center justify-center px-6 bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] overflow-hidden relative">
+      <div className="h-auto flex flex-col items-center justify-start py-10">
         {/* Title Animation */}
         <motion.div
           className="section-title text-6xl font-bold text-[#032854]"
@@ -25,45 +25,41 @@ export const CoreValues: React.FC = () => {
 
         {/* Grid Container */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-6xl mx-auto">
-        {[
-          {
+          {[{
             title: "Z",
             subtitle: "EAL",
             desc: "Driven by integrity and respect, we approach each project with passion and commitment, ensuring our work aligns with the highest standards of quality and honor.",
             subtext: "(Honesty, Leadership)",
-          },
-          {
+          }, {
             title: "C",
             subtitle: "USTOMER FOCUS",
             desc: "We prioritize our clients' unique needs, fostering a collaborative environment built on clear communication and mutual respect. Our goal is to create tailored solutions that drive meaningful, efficient results.",
             subtext: "(Communication)",
-          },
-          {
+          }, {
             title: "S",
             subtitle: "OLUTIONS-DRIVEN",
             desc: "Guided by a positive, solutions-focused mindset, we lead by example in the industry. Through innovative thinking and continuous improvement, we strive to develop impactful software that supports our clients' long-term success.",
             subtext: "(Efficiency, Attitude)",
-          },
-        ].map((value, index) => (
-          <motion.div
-            key={index}
-            className="bg-[#032854] text-white rounded-lg flex flex-col items-center justify-between px-12 py-8 text-center min-h-[300px]"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 * index }} // Stagger effect
-          >
-            <h5 className="text-4xl font-bold">
-              <span className="text-[#F8CD23]">{value.title}</span>{value.subtitle}
-            </h5>
-            <p className="text-sm font-normal leading-relaxed tracking-wide flex-grow mt-4">
-              {value.desc}
-              <br />
-              <span className="block mt-3">{value.subtext}</span>
-            </p>
-          </motion.div>
-        ))}
-      </div>
+          }].map((value, index) => (
+            <motion.div
+              key={index}
+              className="bg-[#032854] text-white rounded-lg flex flex-col items-center justify-between px-12 py-8 text-center min-h-[300px]"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 * index }} // Stagger effect
+            >
+              <h5 className="text-4xl font-bold">
+                <span className="text-[#F8CD23]">{value.title}</span>{value.subtitle}
+              </h5>
+              <p className="text-sm font-normal leading-relaxed tracking-wide flex-grow mt-4">
+                {value.desc}
+                <br />
+                <span className="block mt-3">{value.subtext}</span>
+              </p>
+            </motion.div>
+          ))}
+        </div>
 
         {/* Bible Verse */}
         <motion.div

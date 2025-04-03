@@ -1,9 +1,12 @@
 "use client";
 import { useRef, useState } from "react";
 import axios from "axios";
+import { motion, useInView } from "framer-motion";
 
 export const CallToAction = () => {
   const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,8 +25,7 @@ export const CallToAction = () => {
     setLoading(true);
 
     try {
-      // Send form data to the Flask API
-      const response = await axios.post("http://localhost:5000/contact", {
+      const response = await axios.post("http://localhost:3000/contact", {
         name: formData.get("name"),
         email,
         subject: formData.get("subject"),
@@ -41,12 +43,16 @@ export const CallToAction = () => {
   };
 
   return (
-    <section
-      id="contact"
-      ref={sectionRef}
-      className="min-h-screen pt-1 pb-14 md:pt-0 md:pb-8 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE,_100%)] overflow-hidden font-montserrat"
-    >
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
+    <section ref={sectionRef} id="contact" className="relative overflow-hidden font-montserrat pt-8 pb-8">
+      {/* Background Wipe Effect (Triggered on Scroll) */}
+      <motion.div
+        className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] z-0"
+        initial={{ height: "0%" }}
+        animate={isInView ? { height: "100%" } : { height: "0%" }}
+        transition={{ duration: 1.5, ease: "easeInOut" }}
+      />
+
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between relative z-10">
         {/* Left Text Section */}
         <div className="md:w-1/2 text-left space-y-6">
           <h2 className="text-5xl font-extrabold text-[#010D3E] leading-tight">

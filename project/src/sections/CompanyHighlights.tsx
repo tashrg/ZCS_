@@ -9,7 +9,7 @@ import { motion } from "framer-motion"; // Import framer-motion
 
 export const CompanyHighlights = () => {
   return (
-    <section className="min-h-screen pt-1 pb-14 md:pt-0 md:pb-8 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE,_100%)] overflow-hidden">
+    <section className="relative pt-7 pb-10 bg-gradient-to-r from-[#ffffff]/30 to-[#ffffff] overflow-hidden">
       <div className="container">
         <div className="section-heading">
           <div className="flex justify-center">

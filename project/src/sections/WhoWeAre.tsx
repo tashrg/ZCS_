@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -66,131 +66,139 @@ export const WhoWeAre = () => {
       if (intervalId) clearInterval(intervalId);
     };
   }, [is1NewHovered]);
-  
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 pb-15 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE,_100%)] overflow-hidden relative">
-      <div className="min-h-screen flex flex-col items-center justify-start py-20">
-      <motion.div 
-        className="flex items-center justify-center w-full mb-12 relative"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <h1 className="text-6xl font-montserrat font-bold text-[#032854] text-center">
-          Who We Are
-        </h1>
-      </motion.div>
-    {/* First Section */}
-      <div className="w-full max-w-6xl flex flex-col md:flex-row items-center">
-        <div 
-          className="md:w-1/3 w-full flex justify-center h-[500px]"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <motion.div
-            key={currentImage}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="w-full h-full max-w-[400px] rounded-lg shadow-lg overflow-hidden"
+    <div className="h-auto flex flex-col items-center justify-center px-6 pb-15 bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] overflow-hidden relative">
+      <div className="h-auto flex flex-col items-center justify-start py-20">
+      <div className="container">
+          <div className="flex justify-center">
+            <div className="tag text-[#032854] font-bold uppercase font-montserrat">
+              Zenith Core Solutions
+            </div>
+          </div>
+          {/* Animated Title */}
+          <motion.h2
+            className="section-title mt-5 text-6xl font-montserrat font-bold text-[#032854]"
+            initial={{ opacity: 0, y: 50 }} // Start invisible and below
+            whileInView={{ opacity: 1, y: 0 }} // Fade in and float up when in view
+            viewport={{ once: true }} // Trigger animation only once
+            transition={{ duration: 0.8, ease: "easeOut" }} // Smooth animation
           >
-            <Image
-              src={images[currentImage]}
-              alt="Profile"
-              width={400}
-              height={400}
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </motion.div>
+            Our Leadership Team
+          </motion.h2>
+          <p className="section-description mt-5 text-xl text-center font-openSans">
+            
+          </p>
         </div>
-
-        <div className="md:w-2/3 md:ml-12 mt-8 md:mt-0 text-center md:text-left relative">
-          <h2 className="text-4xl font-bold text-[#032854] mt-4">Cris Joe Salgo</h2>
-          <h3 className="text-2xl font-semibold italic text-[#032854]">Chief Operating Officer</h3>
-            <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
-                This is the first paragraph with an indent. The text is justified for a cleaner look, making it more readable.
-            </p>
-            <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
-                The second paragraph follows the same style, keeping the layout visually balanced and easy to read.
-            </p>
-        </div>
-      </div>
-    {/* Second Section */}
-      <div className="w-full max-w-6xl flex flex-col md:flex-row-reverse items-center mt-2">
-        <div 
-          className="md:w-1/3 w-full flex justify-center h-[500px]"
-          onMouseEnter={() => setIsNewHovered(true)}
-          onMouseLeave={() => setIsNewHovered(false)}
-        >
-          <motion.div
-            key={currentNewImage}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="w-full h-full max-w-[400px] rounded-lg shadow-lg overflow-hidden"
+        {/* First Section */}
+        <div className="w-full max-w-6xl flex flex-col md:flex-row items-center">
+          <div 
+            className="md:w-1/3 w-full flex justify-center h-[500px]"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
-            <Image
-              src={newImages[currentNewImage]}
-              alt="Profile"
-              width={400}
-              height={400}
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </motion.div>
-        </div>
+            <motion.div
+              key={currentImage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="w-full h-full max-w-[400px] rounded-lg shadow-lg overflow-hidden"
+            >
+              <Image
+                src={images[currentImage]}
+                alt="Profile"
+                width={400}
+                height={400}
+                className="w-full h-full object-cover rounded-lg shadow-lg"
+              />
+            </motion.div>
+          </div>
 
-        <div className="md:w-2/3 md:mr-12 mt-8 md:mt-0 text-center md:text-left relative">
-          <h2 className="text-4xl font-bold text-[#032854] mt-4">New Section Title</h2>
-          <h3 className="text-2xl font-semibold italic text-[#032854]">New Section Subtitle</h3>
-          <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
-                This is the first paragraph with an indent. The text is justified for a cleaner look, making it more readable.
+          <div className="md:w-2/3 md:ml-12 mt-8 md:mt-0 text-center md:text-left relative">
+            <h2 className="text-4xl font-bold text-[#032854] mt-4">Chris Joie Salgo</h2>
+            <h3 className="text-2xl font-semibold italic text-[#032854]">Co-Founder and COO</h3>
+            <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
+              This is the first paragraph with an indent. The text is justified for a cleaner look, making it more readable.
             </p>
             <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
-                The second paragraph follows the same style, keeping the layout visually balanced and easy to read.
+              The second paragraph follows the same style, keeping the layout visually balanced and easy to read.
             </p>
+          </div>
         </div>
-      </div>
-    {/* Third Section */}
+        {/* Second Section */}
+        <div className="w-full max-w-6xl flex flex-col md:flex-row-reverse items-center mt-2">
+          <div 
+            className="md:w-1/3 w-full flex justify-center h-[500px]"
+            onMouseEnter={() => setIsNewHovered(true)}
+            onMouseLeave={() => setIsNewHovered(false)}
+          >
+            <motion.div
+              key={currentNewImage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="w-full h-full max-w-[400px] rounded-lg shadow-lg overflow-hidden"
+            >
+              <Image
+                src={newImages[currentNewImage]}
+                alt="Profile"
+                width={400}
+                height={400}
+                className="w-full h-full object-cover rounded-lg shadow-lg"
+              />
+            </motion.div>
+          </div>
+
+          <div className="md:w-2/3 md:mr-12 mt-8 md:mt-0 text-center md:text-left relative">
+            <h2 className="text-4xl font-bold text-[#032854] mt-4">John Warren Cedro</h2>
+            <h3 className="text-2xl font-semibold italic text-[#032854]">Co-Founder and CTO</h3>
+            <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
+              This is the first paragraph with an indent. The text is justified for a cleaner look, making it more readable.
+            </p>
+            <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
+              The second paragraph follows the same style, keeping the layout visually balanced and easy to read.
+            </p>
+          </div>
+        </div>
+        {/* Third Section */}
         <div className="w-full max-w-6xl flex flex-col md:flex-row items-center mb-2">
-            <div 
+          <div 
             className="md:w-1/3 w-full flex justify-center h-[500px]"
             onMouseEnter={() => setIs1NewHovered(true)}
             onMouseLeave={() => setIs1NewHovered(false)}
-            >
+          >
             <motion.div
-                key={currentNewImage1}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.8 }}
-                className="w-full h-full max-w-[400px] rounded-lg shadow-lg overflow-hidden"
+              key={currentNewImage1}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+              className="w-full h-full max-w-[400px] rounded-lg shadow-lg overflow-hidden"
             >
-                <Image
+              <Image
                 src={newImages1[currentNewImage1]}
                 alt="Profile"
                 width={400}
                 height={400}
                 className="w-full h-full object-cover rounded-lg shadow-lg"
-                />
+              />
             </motion.div>
-            </div>
+          </div>
 
-            <div className="md:w-2/3 md:ml-12 mt-8 md:mt-0 text-center md:text-left relative">
-            <h2 className="text-4xl font-bold text-[#032854] mt-4">Cris Joe Salgo</h2>
-            <h3 className="text-2xl font-semibold italic text-[#032854]">Chief Operating Officer</h3>
+          <div className="md:w-2/3 md:ml-12 mt-8 md:mt-0 text-center md:text-left relative">
+            <h2 className="text-4xl font-bold text-[#032854] mt-4">Joeby Saldivar</h2>
+            <h3 className="text-2xl font-semibold italic text-[#032854]">Founder and CEO</h3>
             <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
-                    This is the first paragraph with an indent. The text is justified for a cleaner look, making it more readable.
-                </p>
-                <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
-                    The second paragraph follows the same style, keeping the layout visually balanced and easy to read.
-                </p>
-            </div>
+              This is the first paragraph with an indent. The text is justified for a cleaner look, making it more readable.
+            </p>
+            <p className="text-lg text-[#032854] leading-loose tracking-wide text-justify max-w-prose indent-8">
+              The second paragraph follows the same style, keeping the layout visually balanced and easy to read.
+            </p>
+          </div>
         </div>
+      </div>
     </div>
-  </div>
   );
 };
