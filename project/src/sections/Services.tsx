@@ -1,16 +1,24 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import image1 from "/src/assets/ch-main.png";
+import image2 from "/src/assets/ch1.png";
 
-// Define the types for the FlipCard props
+const backgroundImages = [image1, image2];
+
 interface FlipCardProps {
   frontText: string;
   backText: string;
   onClick: (front: string, back: string) => void;
+  index: number;
 }
 
 export const Services = () => {
-  const [popupInfo, setPopupInfo] = useState<{ front: string; back: string } | null>(null);
+  const [popupInfo, setPopupInfo] = useState<{
+    front: string;
+    back: string;
+  } | null>(null);
 
   const handleFlipCardClick = (front: string, back: string) => {
     setPopupInfo({ front, back });
@@ -20,21 +28,64 @@ export const Services = () => {
     setPopupInfo(null);
   };
 
-  const services: FlipCardProps[] = [
-    { frontText: "Customer Software Development", backText: "Tailored software solutions for businesses.", onClick: handleFlipCardClick },
-    { frontText: "Website Development & Web Design", backText: "Modern, responsive, and SEO-friendly websites.", onClick: handleFlipCardClick },
-    { frontText: "Web Application Development", backText: "Scalable and efficient web apps.", onClick: handleFlipCardClick },
-    { frontText: "Mobile Application Development", backText: "Cross-platform and native mobile apps.", onClick: handleFlipCardClick },
-    { frontText: "AI/ML Engineering (Coming Soon)", backText: "AI-driven solutions for automation and insights.", onClick: handleFlipCardClick },
-    { frontText: "Software Integration Services", backText: "Seamless integration of various software systems.", onClick: handleFlipCardClick },
-    { frontText: "UI/UX Design Prototyping", backText: "User-friendly interfaces and prototypes.", onClick: handleFlipCardClick },
-    { frontText: "Information Technology Consultation", backText: "Expert IT strategies for your business.", onClick: handleFlipCardClick },
-    { frontText: "Automation and Workflow Optimization", backText: "Enhancing business processes through automation.", onClick: handleFlipCardClick },
-    { frontText: "Agentic AI (Coming Soon)", backText: "Next-gen AI systems with autonomous capabilities.", onClick: handleFlipCardClick }
+  const services: Omit<FlipCardProps, "index">[] = [
+    {
+      frontText: "Customer Software Development",
+      backText: "Tailored software solutions for businesses.",
+      onClick: handleFlipCardClick,
+    },
+    {
+      frontText: "WEBSITE DEVELOPMENT & WEB DESIGN",
+      backText: "Modern, responsive, and SEO-friendly websites.",
+      onClick: handleFlipCardClick,
+    },
+    {
+      frontText: "WEB APPLICATION DEVELOPMENT",
+      backText: "Scalable and efficient web apps.",
+      onClick: handleFlipCardClick,
+    },
+    {
+      frontText: "MOBILE APPLICATION DEVELOPMENT",
+      backText: "Cross-platform and native mobile apps.",
+      onClick: handleFlipCardClick,
+    },
+    {
+      frontText: "AI/ML ENGINEERING (COMING SOON)",
+      backText: "AI-driven solutions for automation and insights.",
+      onClick: handleFlipCardClick,
+    },
+    {
+      frontText: "Software Integration Services",
+      backText: "Seamless integration of various software systems.",
+      onClick: handleFlipCardClick,
+    },
+    {
+      frontText: "UI/UX DESIGN PROTOTYPING",
+      backText: "User-friendly interfaces and prototypes.",
+      onClick: handleFlipCardClick,
+    },
+    {
+      frontText: "INFORMATION TECHNOLOGY CONSULTATION",
+      backText: "Expert IT strategies for your business.",
+      onClick: handleFlipCardClick,
+    },
+    {
+      frontText: "AUTOMATION AND WORKFLOW OPTIMIZATION",
+      backText: "Enhancing business processes through automation.",
+      onClick: handleFlipCardClick,
+    },
+    {
+      frontText: "AGENTIC AI (COMING SOON)",
+      backText: "Next-gen AI systems with autonomous capabilities.",
+      onClick: handleFlipCardClick,
+    },
   ];
 
   return (
-    <section id="services" className="bg-radial-blue-gradient bg-gradient-to-r overflow-hidden from-[#ffffff]/30 to-[#ffffff] relative">
+    <section
+      id="services"
+      className="bg-radial-blue-gradient bg-gradient-to-r overflow-hidden from-[#ffffff]/30 to-[#ffffff] relative"
+    >
       <div className="container relative z-10">
         <motion.h2
           initial={{ opacity: 0, x: 50 }}
@@ -46,41 +97,59 @@ export const Services = () => {
           Our Services
         </motion.h2>
         <p className="section-description mt-5 text-xl text-center font-openSans">
-          Our expertise spans cutting-edge software development, intuitive digital experiences, and AI-driven innovations, ensuring your business stays ahead in an ever-evolving digital landscape.
+          Our expertise spans cutting-edge software development, intuitive
+          digital experiences, and AI-driven innovations, ensuring your business
+          stays ahead in an ever-evolving digital landscape.
         </p>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center mt-12"
-        >
+        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center mt-12 px-4 sm:px-6 md:px-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: 100 }}  // Start from the right
-              whileInView={{ opacity: 1, x: 0 }} // Wipe from right to left
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-              className={service.frontText === "Agentic AI (Coming Soon)" ? "md:col-start-2" : ""}  // Align Agentic AI with second column
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
+              className={
+                service.frontText === "AGENTIC AI (COMING SOON)"
+                  ? "md:col-start-2" // Modified line
+                  : ""
+              }
             >
               <FlipCard
                 frontText={service.frontText}
                 backText={service.backText}
                 onClick={service.onClick}
                 className={index === services.length - 1 ? "md:col-span-3" : ""}
+                index={index}
               />
             </motion.div>
           ))}
         </motion.div>
 
         {popupInfo && (
-          <Popup frontText={popupInfo.front} backText={popupInfo.back} onClose={closePopup} />
+          <Popup
+            frontText={popupInfo.front}
+            backText={popupInfo.back}
+            onClose={closePopup}
+          />
         )}
       </div>
     </section>
   );
 };
 
-// 🔹 Flip Card Component
-const FlipCard: React.FC<FlipCardProps & { className?: string }> = ({ frontText, backText, className, onClick }) => {
+const FlipCard: React.FC<FlipCardProps & { className?: string }> = ({
+  frontText,
+  backText,
+  className,
+  onClick,
+  index,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -92,19 +161,28 @@ const FlipCard: React.FC<FlipCardProps & { className?: string }> = ({ frontText,
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.3 }}
     >
-      <motion.div
-        className={`w-full h-full rounded-lg shadow-lg font-semibold text-white flex items-center justify-center text-center bg-[#2297F5] ${isHovered ? 'scale-105 transition-transform duration-300' : ''}`}
-        animate={{ backgroundColor: isHovered ? "rgb(66 179 255 / var(--tw-bg-opacity, 1))" : "rgb(34 151 245 / var(--tw-bg-opacity, 1))" }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
-      >
+      <div className="absolute inset-0">
+        <Image
+          src={backgroundImages[index % backgroundImages.length]}
+          alt={frontText}
+          layout="fill"
+          objectFit="cover"
+          className="rounded-lg"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-60 rounded-lg"></div>
+      </div>
+      <motion.div className="absolute inset-0 flex items-center justify-center text-center text-white font-semibold text-lg px-4">
         {frontText}
       </motion.div>
     </motion.div>
   );
 };
 
-// 🔹 Popup Component
-const Popup: React.FC<{ frontText: string; backText: string; onClose: () => void }> = ({ frontText, backText, onClose }) => {
+const Popup: React.FC<{
+  frontText: string;
+  backText: string;
+  onClose: () => void;
+}> = ({ frontText, backText, onClose }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   useEffect(() => {
@@ -128,15 +206,22 @@ const Popup: React.FC<{ frontText: string; backText: string; onClose: () => void
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <button onClick={() => {
-          setIsPopupOpen(false);
-          onClose();
-        }} className="absolute top-2 right-2">
+        <button
+          onClick={() => {
+            setIsPopupOpen(false);
+            onClose();
+          }}
+          className="absolute top-2 right-2"
+        >
           X
         </button>
-        <h2 className="text-xl font-semibold mb-4 text-blue-600">{frontText}</h2>
+        <h2 className="text-xl font-semibold mb-4 text-blue-600">
+          {frontText}
+        </h2>
         <p className="text-gray-700">{backText}</p>
       </motion.div>
     </motion.div>
   );
 };
+
+export default Services;
