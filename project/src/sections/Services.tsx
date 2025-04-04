@@ -102,7 +102,6 @@ export const Services = () => {
           stays ahead in an ever-evolving digital landscape.
         </p>
 
-<<<<<<< HEAD
         {/* Mobile view - vertical single column with fixed card width */}
         <div className="flex flex-col items-center gap-6 mt-12 px-4 md:hidden">
           {services.map((service, index) => (
@@ -110,21 +109,12 @@ export const Services = () => {
               key={index}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-=======
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center mt-12 px-4 sm:px-6 md:px-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
->>>>>>> 28b8247dfa305b10179311bbed2341331b59a90c
               viewport={{ once: true }}
               transition={{
                 duration: 0.5,
                 delay: index * 0.1,
                 ease: "easeOut",
               }}
-<<<<<<< HEAD
             >
               <FlipCard
                 frontText={service.frontText}
@@ -152,11 +142,6 @@ export const Services = () => {
               className={
                 service.frontText === "AGENTIC AI (COMING SOON)"
                   ? "md:col-start-2"
-=======
-              className={
-                service.frontText === "AGENTIC AI (COMING SOON)"
-                  ? "md:col-start-2" // Modified line
->>>>>>> 28b8247dfa305b10179311bbed2341331b59a90c
                   : ""
               }
             >
@@ -264,8 +249,4 @@ const Popup: React.FC<{
   );
 };
 
-<<<<<<< HEAD
 export default Services;
-=======
-export default Services;
->>>>>>> 28b8247dfa305b10179311bbed2341331b59a90c
