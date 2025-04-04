@@ -79,7 +79,7 @@
     padding-bottom: 2rem;  /* pb-8 equivalent */
   }
   
-  @media (min-width: 768px) {
+  @media (min-width: 780px) {
     .bg-radial-blue-gradient {
       padding-top: 3rem;  /* md:pt-12 equivalent */
       padding-bottom: 3rem;  /* md:pb-12 equivalent */

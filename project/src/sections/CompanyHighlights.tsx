@@ -4,19 +4,32 @@ import ch1 from "@/assets/ch1.png";
 import ch2 from "@/assets/ch2.png";
 import ch3 from "@/assets/ch3.png";
 import ch4 from "@/assets/ch4.png";
+import bg from "@/assets/bg1.png";
 import Image from "next/image";
 import { motion } from "framer-motion"; // Import framer-motion
 
 export const CompanyHighlights = () => {
   return (
-    <section className="relative pt-7 pb-10 bg-gradient-to-r from-[#ffffff]/30 to-[#ffffff] overflow-hidden">
-      <div className="container">
+    <section
+      className="min-h-[500px] py-16 bg-gradient-to-r from-[#ffffff]/30 to-[#ffffff] overflow-hidden relative"
+      style={{
+        backgroundImage: `url(${bg.src})`, // Using chMain image as the background
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Add a semi-transparent overlay to maintain readability */}
+      <div className="absolute inset-0 bg-[#ffffff] opacity-70 z-0"></div>
+      
+      {/* Add z-10 to container to place content above the background */}
+      <div className="container mx-auto px-4 relative z-10">
         <div className="section-heading">
           <div className="flex justify-center">
             <div className="tag text-[#032854] font-bold uppercase font-montserrat">
               Company Highlights
             </div>
           </div>
+
           {/* Animated Title */}
           <motion.h2
             className="section-title mt-5 text-6xl font-montserrat font-bold text-[#032854]"

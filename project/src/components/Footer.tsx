@@ -62,17 +62,12 @@ export const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="mailto:zenithcoresolutions.sales@gmail.com" className="text-[#032854] hover:text-[#F8CD23]" aria-label="Email us">
+              <a href="mailto:zenithcoresolutions.sales@gmail.com" className="text-[#032854] hover:text-[#F8CD23] break-normal md:break-words" aria-label="Email us">
                 zenithcoresolutions.sales@gmail.com
               </a>
             </li>
             <li>
-              <a href="https://www.google.com/maps/search/?api=1&query=463+Damayan+Navarro,+General+Trias,+Cavite"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#032854] hover:text-[#F8CD23]"
-                aria-label="View location on Google Maps"
-              >
+              <a>
                 463 Damayan Navarro, General Trias, Cavite
               </a>
             </li>

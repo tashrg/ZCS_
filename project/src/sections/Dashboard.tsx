@@ -37,13 +37,13 @@ export const Dashboard = () => {
         }}
       ></motion.div>
 
-      <div className="container h-[550px] flex flex-col md:flex-row items-center justify-center px-4 md:px-8 relative z-20">
+      <div className="container h-[525px] flex flex-col md:flex-row items-center justify-between px-4 md:px-8 relative z-20">
         
-        {/* GIF Logo container - Moving the logo further to the left */}
-        <div className="w-full flex items-center justify-center order-1 md:order-1 mb-8 md:mb-0 md:ml-[-250px]">
+        {/* GIF Logo container - Adjusting the position to be on the left */}
+        <div className="w-full md:w-1/2 flex items-center justify-center order-1 md:order-1 mb-8 md:mb-0 md:ml-[-100px] flex-grow">
           <motion.div
-            className="w-[80%] md:w-[600px] lg:w-[800px] opacity-60"
-            animate={{ translateY: [-20, 20] }}
+            className="w-[65%] md:w-[600px] lg:w-[800px] opacity-60"
+            animate={{ translateY: [-60, 0] }}
             transition={{
               repeat: Infinity,
               repeatType: "mirror",
@@ -62,8 +62,8 @@ export const Dashboard = () => {
           </motion.div>
         </div>
 
-        {/* Text container */}
-        <div className="w-full md:w-1/2 px-4 md:px-8 order-2 md:order-2 z-30 flex flex-col justify-center text-center md:text-left md:ml-[-300px]">
+        {/* Text container - Adjusting to consume space on the right */}
+        <div className="w-full md:w-1/2 px-4 md:px-8 order-2 md:order-2 z-30 flex flex-col justify-center text-center md:text-left md:mr-[-10px]">
           <motion.h1
             className="text-5xl md:text-6xl font-bold tracking-tighter font-montserrat text-transparent bg-clip-text"
             initial="hidden"

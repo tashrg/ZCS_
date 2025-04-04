@@ -15,24 +15,30 @@ const logos = [
 
 export const LogoTicker = () => {
   return (
-    <div className="py-15 md:py-20 relative bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] overflow-hidden">
-      <div className="flex w-max">
-        {/* Masking effect: Keeps center visible while sides fade */}
-        <div className="flex overflow-hidden absolute inset-0 w-full [mask-image:linear-gradient(to_right,rgba(0,0,0,0),rgba(0,0,0,1)_40%,rgba(0,0,0,1)_60%,rgba(0,0,0,0))]">
+    <div className="py-5 md:py-10 relative bg-gradient-to-r from-[#ffffff]/30 to-[#ffffff] overflow-hidden">
+      <div className="relative w-full h-14 md:h-18">
+        {/* Container for the animation */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Masking effect: Keeps center visible while sides fade */}
+          <div className="absolute inset-0 w-full [mask-image:linear-gradient(to_right,rgba(0,0,0,0),rgba(0,0,0,1)_20%,rgba(0,0,0,1)_80%,rgba(0,0,0,0))]"></div>
+          
+          {/* Moving logos */}
           <motion.div
-            className="flex gap-14 flex-none pr-14"
-            animate={{ translateX: ["0%", "-50%"] }} 
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="flex gap-8 md:gap-14 items-center absolute"
+            animate={{ x: [0, "-50%"] }} 
+            transition={{ duration: 15, repeat: Infinity, ease: "linear", repeatType: "loop" }}
           >
+            {/* Double the logos to create seamless loop */}
             {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
-              <Image
-                key={index}
-                src={logo.src}
-                alt={logo.alt}
-                width={logo.width}
-                height={logo.height}
-                className="object-contain"
-              />
+              <div key={index} className="flex-shrink-0">
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={logo.width * 0.8}
+                  height={logo.height * 0.8}
+                  className="object-contain"
+                />
+              </div>
             ))}
           </motion.div>
         </div>
@@ -40,3 +46,5 @@ export const LogoTicker = () => {
     </div>
   );
 };
+
+export default LogoTicker;
