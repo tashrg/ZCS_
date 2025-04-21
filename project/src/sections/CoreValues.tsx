@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export const CoreValues: React.FC = () => {
   return (
-    <div className="h-auto flex flex-col items-center justify-center px-6 bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] overflow-hidden relative">
+    <div className="h-auto flex flex-col items-center justify-center px-6 bg-gradient-to-r from-[#a6c2dd] to-[#b7ccdd] overflow-hidden relative">
       <div className="h-auto flex flex-col items-center justify-start py-10">
         {/* Title Animation */}
         <motion.div
@@ -14,13 +14,13 @@ export const CoreValues: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <h1 className="text-6xl font-bold mb-5 mt-12 text-[#032854]">
+          <h1 className="text-4xl md:text-5xl font-montserrat font-bold mb-6 text-[#2297F5]">
             <span className="text-[#2297F5]">
               Z<span className="text-[#F8CD23]">C</span>S
             </span>{" "}
             Core Values
           </h1>
-          <div className="w-20 h-1 bg-[#032854] mx-auto mt-0 mb-10"></div>
+          <div className="w-20 h-1 bg-[#2297F5] mx-auto mt-0 mb-10"></div>
         </motion.div>
 
         {/* Grid Container */}

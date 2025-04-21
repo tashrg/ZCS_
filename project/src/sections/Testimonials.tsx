@@ -13,7 +13,6 @@ import avatar6 from "@/assets/User.png";
 import avatar7 from "@/assets/User.png";
 import avatar8 from "@/assets/User.png";
 import avatar9 from "@/assets/User.png";
-import bgImage from "@/assets/testimonialsboarder.png";
 
 // Define interface for testimonial items
 interface Testimonial {
@@ -143,22 +142,15 @@ export const Testimonials = () => {
   };
 
   return (
-    <section className="min-h-[500px] py-16 bg-gradient-to-r from-[#ffffff]/30 to-[#ffffff] overflow-hidden relative"
-    style={{
-      backgroundImage: `url(${bgImage.src})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center"
-    }}
+    <section className="min-h-[500px] py-16 bg-gradient-to-r from-[#a6c2dd] to-[#b7ccdd] overflow-hidden relative"
   >
-    {/* Add a semi-transparent overlay to maintain readability */}
-    <div className="absolute inset-0 bg-[#ffffff] opacity-70 z-0"></div>
     
     {/* Add z-10 to container to place content above the background */}
     <div className="container mx-auto px-4 relative z-10">
         {/* Title Section */}
         <div className="text-center mb-10">
         <motion.h2
-            className="section-title mt-5 text-6xl font-montserrat font-bold text-[#032854]"
+            className="section-title mt-1 text-4xl md:text-5xl font-montserrat font-bold text-[#2297F5]"
             initial={{ opacity: 0, y: 50 }} // Start invisible and below
             whileInView={{ opacity: 1, y: 0 }} // Fade in and float up when in view
             viewport={{ once: true }} // Trigger animation only once

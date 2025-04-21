@@ -15,7 +15,7 @@ const logos = [
 
 export const LogoTicker = () => {
   return (
-    <div className="py-5 md:py-10 relative bg-gradient-to-r from-[#ffffff]/30 to-[#ffffff] overflow-hidden">
+    <div className="py-5 md:py-10 relative bg-gradient-to-r from-[#a6c2dd] to-[#b7ccdd] overflow-hidden">
       <div className="relative w-full h-14 md:h-18">
         {/* Container for the animation */}
         <div className="absolute inset-0 overflow-hidden">

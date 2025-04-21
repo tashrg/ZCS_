@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import P1 from "@/assets/CEO.webp";
 import P2 from "@/assets/CTO.png";
 import P3 from "@/assets/COO.png";
-import bgImage from "@/assets/bgg2.png";
 
 // Define props interface for the component
 interface AnimatedProfileImageProps {
@@ -48,33 +47,17 @@ const AnimatedProfileImage: React.FC<AnimatedProfileImageProps> = ({ imageUrl, a
 
 export const WhoWeAre = () => {
   return (
-    <div className="h-auto flex flex-col items-center justify-center px-6 pb-15 bg-gradient-to-r from-[#eef4fa]/30 to-[#eef4fa] overflow-hidden relative">
+    <div className="h-auto flex flex-col items-center justify-center px-6 pb-15 bg-gradient-to-r from-[#a6c2dd] to-[#b7ccdd] overflow-hidden relative">
       {/* Main content container with background overlay */}
       <div className="h-auto w-full flex flex-col items-center justify-start py-20 relative">
-        {/* Background image with reduced opacity */}
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: `url(${bgImage.src})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: 0.3,
-          }}
-        ></div>
-        
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#eef4fa]/80 to-[#eef4fa]/70"></div>
         
         {/* Content container */}
         <div className="container relative z-10">
           <div className="flex justify-center">
-            <div className="tag text-[#032854] font-bold uppercase font-montserrat">
-              Zenith Core Solutions
-            </div>
           </div>
           {/* Animated Title */}
           <motion.h2
-            className="section-title mt-5 text-6xl font-montserrat font-bold text-[#032854] text-center"
+            className="section-title text-4xl md:text-5xl font-montserrat font-bold mb-4 text-[#2297F5] text-center"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

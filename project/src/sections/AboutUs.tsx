@@ -5,14 +5,14 @@ import aboutBg from "@/assets/ch-main.png";
 
 export const AboutUs: React.FC = () => {
   return (
-    <div className="h-auto pt-1 pb-14 md:pt-0 md:pb-8 bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd] overflow-hidden">
+    <div className="h-auto pt-1 pb-14 md:pt-0 md:pb-8 bg-gradient-to-r from-[#a6c2dd] to-[#b7ccdd] overflow-hidden">
       <div className="flex flex-col items-center justify-start py-10">
         <motion.h1 
-          className="section-title mt-1 text-6xl font-montserrat font-bold text-[#032854]"
-          initial={{ opacity: 0, y: 50 }} // Start invisible and below
-          whileInView={{ opacity: 1, y: 0 }} // Fade in and float up when in view
-          viewport={{ once: true }} // Trigger animation only once
-          transition={{ duration: 0.8, ease: "easeOut" }} // Smooth animation
+          className="section-title text-4xl md:text-5xl font-montserrat font-bold mt-1 text-[#2297F5]"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           About Us
         </motion.h1>

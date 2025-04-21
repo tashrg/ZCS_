@@ -1,21 +1,19 @@
-"use client"; 
+"use client";
 
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Logo from "@/assets/ZCSName.png";
 import SocialX from "@/assets/social-x.svg";
 import SocialInsta from "@/assets/social-ins.svg";
 import SocialLinkedIn from "@/assets/social-in.svg";
 import SocialFB from "@/assets/social-fb.svg";
 import SocialYoutube from "@/assets/social-yt.svg";
+import Logo from "@/assets/ZCSLogo.png";
 
 export const Footer = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const [bgColor, setBgColor] = useState("bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd]");
 
-  // Function to handle smooth scrolling or navigation
   const handleNavigation = (path: string, sectionId: string) => {
     if (pathname === path) {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -24,32 +22,42 @@ export const Footer = () => {
     }
   };
 
-  // Detect scroll position and change background
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const footerOffset = document.getElementById("footer")?.offsetTop || 0;
-      const windowHeight = window.innerHeight;
-
-      if (scrollY + windowHeight >= footerOffset - 100) {
-        setBgColor("bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd]"); // Apply the same gradient
-      } else {
-        setBgColor("bg-gradient-to-r from-[#a6c2dd]/30 to-[#b7ccdd]"); // Keep the same gradient
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <footer id="footer" className={`min-h-[calc(2.5rem+2.5rem)] pt-10 pb-10 md:pb-8 overflow-hidden text-[#010D3E] text-sm font-montserrat transition-colors duration-700 ${bgColor}`}>
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+    <footer
+      id="footer"
+      className="relative min-h-[calc(2.5rem+2.5rem)] pt-10 pb-10 md:pb-8 overflow-hidden text-[#010D3E] text-sm font-montserrat transition-colors duration-700"
+    >
+      {/* Background Gradient Layers */}
+      <div className="absolute inset-0 z-0">
+        {/* Layer 1: Match the section above with horizontal gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#a6c2dd] to-[#b7ccdd]" />
         
-        {/* ZCS Logo and Tagline */}
+        {/* Layer 2: Fade vertically to #375b73 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#457799] opacity-90" />
+      </div>
+
+      {/* Footer Content */}
+      <div className="relative z-10 container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+        {/* Logo + Tagline */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
-          <Image src={Logo} height={40} alt="ZCS Name" className="mt-4" />
-          <p className="mt-1 ml-4 text-[#032854] font-semibold">Make your technology creative</p>
+          <div className="flex items-center gap-2 mt-4">
+            <Image
+              src={Logo}
+              alt="ZCS Logo"
+              height={60}
+              width={45}
+              className="cursor-pointer"
+            />
+            <div className="flex flex-col font-bold font-montserrat text-sm leading-tight">
+              <div>
+                <span className="text-[#2297F5]">ZENITH C</span>
+                <span className="text-[#F8CD23]">O</span>
+                <span className="text-[#2297F5]">RE</span>
+              </div>
+              <span className="text-[#2297F5]">SOLUTIONS</span>
+            </div>
+          </div>
+          <p className="mt-4 text-[#032854] font-semibold">Make your technology creative</p>
         </div>
 
         {/* Contact Us */}
@@ -57,12 +65,12 @@ export const Footer = () => {
           <h3 className="text-[#032854] font-bold mb-4">Contact Us</h3>
           <ul className="space-y-3">
             <li>
-              <a href="tel:+639266132248" className="text-[#032854] hover:text-[#F8CD23]" aria-label="Call us">
+              <a href="tel:+639266132248" className="text-[#032854] hover:text-[#F8CD23]">
                 +63 926 613 2248
               </a>
             </li>
             <li>
-              <a href="mailto:zenithcoresolutions.sales@gmail.com" className="text-[#032854] hover:text-[#F8CD23] break-normal md:break-words" aria-label="Email us">
+              <a href="mailto:zenithcoresolutions.sales@gmail.com" className="text-[#032854] hover:text-[#F8CD23] break-normal md:break-words">
                 zenithcoresolutions.sales@gmail.com
               </a>
             </li>
@@ -74,7 +82,7 @@ export const Footer = () => {
           </ul>
         </div>
 
-        {/* Quick Links (Centered) */}
+        {/* Quick Links */}
         <div className="mt-6 flex-col items-start mx-auto">
           <h3 className="text-[#032854] font-bold mb-4">Quick Links</h3>
           <ul className="space-y-3">
@@ -120,7 +128,7 @@ export const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <p className="mt-6 text-center text-[#032854] font-medium">
+      <p className="mt-6 text-center text-[#032854] font-medium relative z-10">
         &copy; 2025 ZCS. All Rights Reserved.
       </p>
     </footer>
