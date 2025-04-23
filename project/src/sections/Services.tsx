@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-
-
+import { createPortal } from "react-dom";
 
 interface FlipCardProps {
   frontText: string;
@@ -397,9 +396,8 @@ const ServicePopup: React.FC<{
   backText: string;
   onClose: () => void;
 }> = ({ frontText, backText, onClose }) => {
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
-
   useEffect(() => {
+    // Prevent background scrolling when popup is open
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
@@ -407,43 +405,32 @@ const ServicePopup: React.FC<{
   }, []);
 
   return (
-    <motion.div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 backdrop-blur-sm"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={() => {
-        setIsPopupOpen(false);
-        onClose();
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm"
+      onClick={onClose}
+      style={{ 
+        position: 'fixed', 
+        top: 0, 
+        left: 0, 
+        right: 0, 
+        bottom: 0,
+        zIndex: 1000000, // Extremely high z-index to overcome all other elements
       }}
     >
-      <motion.div
+      <div
         className="bg-white p-6 md:p-8 rounded-2xl shadow-2xl relative max-w-md w-full mx-4"
-        initial={{ opacity: 0, y: 100, scale: 0.8 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: -100, scale: 0.8 }}
-        transition={{ type: "spring", damping: 25, stiffness: 200 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <motion.button
-          onClick={() => {
-            setIsPopupOpen(false);
-            onClose();
-          }}
+        <button
+          onClick={onClose}
           className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 transition-colors duration-200"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
-        </motion.button>
+        </button>
         
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
+        <div>
           <div className="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center mb-5 mx-auto">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#2297F5" className="w-8 h-8">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -459,9 +446,9 @@ const ServicePopup: React.FC<{
           <p className="text-gray-600 text-center leading-relaxed text-sm md:text-base">
             {backText}
           </p>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </div>
+      </div>
+    </div>
   );
 };
 

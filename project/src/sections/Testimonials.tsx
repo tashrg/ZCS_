@@ -1,9 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-
-// You'll need to replace these with actual images
+import { motion, AnimatePresence } from "framer-motion";
 import avatar1 from "@/assets/User.png";
 import avatar2 from "@/assets/User.png";
 import avatar3 from "@/assets/User.png";
@@ -14,7 +12,6 @@ import avatar7 from "@/assets/User.png";
 import avatar8 from "@/assets/User.png";
 import avatar9 from "@/assets/User.png";
 
-// Define interface for testimonial items
 interface Testimonial {
   text: string;
   imageSrc: string;
@@ -26,6 +23,13 @@ interface Testimonial {
 // Define interface for StarRating props
 interface StarRatingProps {
   rating: number;
+}
+
+// Interface for Counter component
+interface CounterProps {
+  end: number;
+  suffix?: string;
+  duration?: number;
 }
 
 const testimonials: Testimonial[] = [
@@ -94,9 +98,61 @@ const testimonials: Testimonial[] = [
   },
 ];
 
+// Counter component for animating numbers
+const Counter: React.FC<CounterProps> = ({ end, suffix = "", duration = 2 }) => {
+  const [count, setCount] = useState(0);
+  const nodeRef = useRef<HTMLSpanElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (nodeRef.current) {
+      observer.observe(nodeRef.current);
+    }
+
+    return () => {
+      if (nodeRef.current) {
+        observer.unobserve(nodeRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!inView) return;
+
+    let startValue = 0;
+    const increment = end / (duration * 60); // 60fps approximately
+    const timer = setInterval(() => {
+      startValue += increment;
+      
+      if (startValue >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(startValue));
+      }
+    }, 16); // ~60fps
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [end, duration, inView]);
+
+  return <span ref={nodeRef}>{count}{suffix}</span>;
+};
+
 export const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   // Check if we're on mobile viewport
   useEffect(() => {
@@ -128,166 +184,351 @@ export const Testimonials = () => {
   const prevIndex = currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1;
   const nextIndex = currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1;
 
-  // Generate star ratings with proper typing
+  // Generate star ratings with proper typing and animation
   const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
     return (
       <div className="flex">
         {[...Array(5)].map((_, i) => (
-          <span key={i} className="text-sm text-[#2297F5]">
-            {i < rating ? "★" : "☆"}
-          </span>
+          <motion.span 
+            key={i} 
+            className={`text-lg ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: i * 0.1, type: "spring", stiffness: 300 }}
+          >
+            ★
+          </motion.span>
         ))}
       </div>
     );
   };
 
   return (
-    <section className="min-h-[500px] py-16 bg-gradient-to-r from-[#a6c2dd] to-[#b7ccdd] overflow-hidden relative"
-  >
-    
-    {/* Add z-10 to container to place content above the background */}
-    <div className="container mx-auto px-4 relative z-10">
-        {/* Title Section */}
-        <div className="text-center mb-10">
-        <motion.h2
-            className="section-title mt-1 text-4xl md:text-5xl font-montserrat font-bold text-[#2297F5]"
-            initial={{ opacity: 0, y: 50 }} // Start invisible and below
-            whileInView={{ opacity: 1, y: 0 }} // Fade in and float up when in view
-            viewport={{ once: true }} // Trigger animation only once
-            transition={{ duration: 0.8, ease: "easeOut" }} // Smooth animation
+    <section className="py-16 bg-white overflow-hidden relative">
+      {/* Beautiful subtle pattern background */}
+      <div className="absolute inset-0 bg-blue-50 opacity-20 bg-[radial-gradient(#2297F5_1px,transparent_1px)] [background-size:20px_20px] z-0"></div>
+      
+      {/* Decorative elements */}
+      <motion.div 
+        className="absolute top-20 left-10 w-24 h-24 rounded-full bg-blue-100 opacity-30 z-0"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          x: [0, 10, 0],
+          y: [0, -10, 0],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
+      <motion.div 
+        className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-blue-100 opacity-30 z-0"
+        animate={{ 
+          scale: [1, 1.3, 1],
+          x: [0, -15, 0],
+          y: [0, 15, 0],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
+      {/* Content */}
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Title Section with enhanced animations */}
+        <div className="text-center mb-24">
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="inline-block mb-2 px-4 py-1 bg-blue-100 rounded-full text-blue-600 text-sm font-medium"
           >
-            Testimonials
+            Client Feedback
+          </motion.div>
+          
+          <motion.h2
+            className="mt-1 text-4xl md:text-5xl font-bold text-gray-800"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            What Our <span className="text-[#2297F5]">Clients</span> Say
           </motion.h2>
-          <p className="section-description mt-5 text-xl text-center font-openSans">
-            What client says about us?
-          </p>
+          
+          <motion.div
+            className="mx-auto mt-4 max-w-2xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <p className="text-xl text-gray-600">
+              Dont just take our word for it — hear from the people whove experienced our service
+            </p>
+          </motion.div>
         </div>
-        {/* Testimonials Carousel */}
-        <div className="relative max-w-6xl mx-auto">
-          <div className="flex justify-center items-center relative mb-8">
-            {/* Previous Card (hidden on mobile) */}
-            {!isMobile && (
-              <motion.div
-                key={`prev-${prevIndex}`}
-                className="hidden md:block absolute left-24 w-56 h-64 bg-[#2297F5] rounded-lg shadow p-5 z-10"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="text-xl font-bold text-white opacity-50 mb-2">❝</div>
-                <div className="flex flex-col h-full">
-                  <div className="flex items-center mb-2">
-                    <Image
-                      src={testimonials[prevIndex].imageSrc}
-                      alt={testimonials[prevIndex].name}
-                      width={35}
-                      height={35}
-                      className="rounded-full"
-                    />
-                    <div className="ml-2">
-                      <div className="text-xs font-medium text-white">{testimonials[prevIndex].name}</div>
-                      <div className="text-xs text-white opacity-75">{testimonials[prevIndex].role}</div>
+        
+        {/* Testimonials Carousel - adjusted to move down */}
+        <div 
+          className="relative max-w-6xl mx-auto mt-12"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          <div className="flex justify-center items-center relative mb-14 h-96">
+            <AnimatePresence mode="popLayout">
+              {/* Previous Card (hidden on mobile) */}
+              {!isMobile && (
+                <motion.div
+                  key={`prev-${prevIndex}`}
+                  className="hidden md:block absolute left-0 md:left-16 w-64 h-72 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-xl p-6 z-10 text-white transform -rotate-6"
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 0.85, x: 0, y: 20 }}
+                  transition={{ duration: 0.5, type: "spring" }}
+                >
+                  <div className="text-2xl font-bold opacity-80 mb-3">❝</div>
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-center mb-3">
+                      <div className="h-10 w-10 rounded-full bg-white/20 overflow-hidden">
+                        <Image
+                          src={testimonials[prevIndex].imageSrc}
+                          alt={testimonials[prevIndex].name}
+                          width={40}
+                          height={40}
+                          className="rounded-full object-cover"
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <div className="text-sm font-medium">{testimonials[prevIndex].name}</div>
+                        <div className="text-xs opacity-80">{testimonials[prevIndex].role}</div>
+                      </div>
                     </div>
+                    <p className="text-sm opacity-90 line-clamp-6">
+                      {testimonials[prevIndex].text}
+                    </p>
                   </div>
-                  <p className="text-white text-xs opacity-75 line-clamp-6">
-                    {testimonials[prevIndex].text}
-                  </p>
+                </motion.div>
+              )}
+
+              {/* Current Card - Adjusted position with y offset */}
+              <motion.div
+                key={`current-${currentIndex}`}
+                className="w-full max-w-md bg-white rounded-xl shadow-2xl p-8 z-30"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 20 }} 
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ 
+                  duration: 0.5,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25
+                }}
+              >
+                <motion.div 
+                  className="text-3xl font-bold text-[#2297F5] mb-4"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1, rotateZ: 10 }}
+                  transition={{ delay: 0.2, type: "spring" }}
+                >
+                  ❝
+                </motion.div>
+                
+                <div className="flex flex-col items-center">
+                  <motion.div 
+                    className="relative w-20 h-20 mb-4 rounded-full overflow-hidden border-4 border-blue-100"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    whileHover={{ scale: 1.1, borderColor: "#2297F5" }}
+                    transition={{ delay: 0.3, type: "spring" }}
+                  >
+                    <Image
+                      src={testimonials[currentIndex].imageSrc}
+                      alt={testimonials[currentIndex].name}
+                      fill
+                      className="object-cover"
+                    />
+                  </motion.div>
+                  
+                  <StarRating rating={testimonials[currentIndex].rating} />
+                  
+                  <motion.div 
+                    className="text-center mt-3 mb-5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    <div className="font-medium text-lg text-gray-900">{testimonials[currentIndex].name}</div>
+                    <div className="text-sm text-[#2297F5]">{testimonials[currentIndex].role}</div>
+                  </motion.div>
+                  
+                  <motion.p 
+                    className="text-gray-700 text-lg text-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                  >
+                    {testimonials[currentIndex].text}
+                  </motion.p>
                 </div>
               </motion.div>
-            )}
 
-            {/* Current Card */}
-            <motion.div
-              key={`current-${currentIndex}`}
-              className="w-full max-w-sm bg-white rounded-lg shadow-lg p-5 z-20"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="text-2xl font-bold text-[#2297F5] mb-3">❝</div>
-              <div className="flex flex-col items-center">
-                <Image
-                  src={testimonials[currentIndex].imageSrc}
-                  alt={testimonials[currentIndex].name}
-                  width={60}
-                  height={60}
-                  className="rounded-full mb-2"
-                />
-                <StarRating rating={testimonials[currentIndex].rating} />
-                <div className="text-center mt-1 mb-4">
-                  <div className="font-medium text-sm">{testimonials[currentIndex].name}</div>
-                  <div className="text-xs text-gray-500">{testimonials[currentIndex].role}</div>
-                </div>
-                <p className="text-gray-600 text-sm text-center">
-                  {testimonials[currentIndex].text}
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Next Card (hidden on mobile) */}
-            {!isMobile && (
-              <motion.div
-                key={`next-${nextIndex}`}
-                className="hidden md:block absolute right-24 w-56 h-64 bg-[#2297F5] rounded-lg shadow p-5 z-10"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="text-xl font-bold text-white opacity-50 mb-2">❝</div>
-                <div className="flex flex-col h-full">
-                  <div className="flex items-center mb-2">
-                    <Image
-                      src={testimonials[nextIndex].imageSrc}
-                      alt={testimonials[nextIndex].name}
-                      width={35}
-                      height={35}
-                      className="rounded-full"
-                    />
-                    <div className="ml-2">
-                      <div className="text-xs font-medium text-white">{testimonials[nextIndex].name}</div>
-                      <div className="text-xs text-white opacity-75">{testimonials[nextIndex].role}</div>
+              {/* Next Card (hidden on mobile) */}
+              {!isMobile && (
+                <motion.div
+                  key={`next-${nextIndex}`}
+                  className="hidden md:block absolute right-0 md:right-16 w-64 h-72 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-xl p-6 z-10 text-white transform rotate-6"
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 0.85, x: 0, y: 20 }}
+                  transition={{ duration: 0.5, type: "spring" }}
+                >
+                  <div className="text-2xl font-bold opacity-80 mb-3">❝</div>
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-center mb-3">
+                      <div className="h-10 w-10 rounded-full bg-white/20 overflow-hidden">
+                        <Image
+                          src={testimonials[nextIndex].imageSrc}
+                          alt={testimonials[nextIndex].name}
+                          width={40}
+                          height={40}
+                          className="rounded-full object-cover"
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <div className="text-sm font-medium">{testimonials[nextIndex].name}</div>
+                        <div className="text-xs opacity-80">{testimonials[nextIndex].role}</div>
+                      </div>
                     </div>
+                    <p className="text-sm opacity-90 line-clamp-6">
+                      {testimonials[nextIndex].text}
+                    </p>
                   </div>
-                  <p className="text-white text-xs opacity-75 line-clamp-6">
-                    {testimonials[nextIndex].text}
-                  </p>
-                </div>
-              </motion.div>
-            )}
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-            {/* Navigation Buttons */}
+            {/* Fixed Navigation Buttons - No position change on hover */}
             <button
               onClick={handlePrev}
-              className="absolute left-6 top-1/2 -translate-y-1/2 w-8 h-8 bg-white text-[#2297F5] rounded-full flex items-center justify-center shadow hover:bg-gray-100 focus:outline-none z-30"
+              className="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white text-[#2297F5] rounded-full flex items-center justify-center shadow-lg hover:bg-blue-50 focus:outline-none z-40 border border-blue-100 transform transition-colors duration-200"
               aria-label="Previous testimonial"
             >
               <span className="sr-only">Previous</span>
-              &lt;
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
             </button>
+            
             <button
               onClick={handleNext}
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-8 h-8 bg-white text-[#2297F5] rounded-full flex items-center justify-center shadow hover:bg-gray-100 focus:outline-none z-30"
+              className="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white text-[#2297F5] rounded-full flex items-center justify-center shadow-lg hover:bg-blue-50 focus:outline-none z-40 border border-blue-100 transform transition-colors duration-200"
               aria-label="Next testimonial"
             >
               <span className="sr-only">Next</span>
-              &gt;
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+              </svg>
             </button>
           </div>
 
-          {/* Pagination Dots */}
+          {/* Enhanced Pagination Dots */}
           <div className="flex justify-center">
             {testimonials.map((_, index) => (
-              <button
+              <motion.button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`mx-1 w-2 h-2 rounded-full outline outline-1 outline-[#032854] ${
-                  index === currentIndex ? "bg-blue-500" : "bg-transparent"
+                className={`mx-1 w-3 h-3 rounded-full transition-all duration-300 relative ${
+                  index === currentIndex ? "bg-[#2297F5]" : "bg-gray-300"
                 }`}
+                whileHover={{ scale: 1.3 }}
+                whileTap={{ scale: 0.9 }}
                 aria-label={`Go to testimonial ${index + 1}`}
-              />
+              >
+                {index === currentIndex && (
+                  <motion.span 
+                    className="absolute inset-0 rounded-full bg-blue-200 -z-10"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 2 }}
+                    transition={{ duration: 1, repeat: Infinity, repeatType: "loop" }}
+                  />
+                )}
+              </motion.button>
             ))}
           </div>
         </div>
+        
+        {/* Social proof counter section with animated numbers */}
+        <motion.div 
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <motion.div 
+            className="bg-blue-50 rounded-lg p-6 text-center"
+            whileHover={{ scale: 1.05, backgroundColor: "#e6f0ff" }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.h3 
+              className="text-3xl font-bold text-[#2297F5]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <Counter end={500} suffix="+" duration={2.5} />
+            </motion.h3>
+            <p className="text-gray-600">Happy Clients</p>
+          </motion.div>
+          
+          <motion.div 
+            className="bg-blue-50 rounded-lg p-6 text-center"
+            whileHover={{ scale: 1.05, backgroundColor: "#e6f0ff" }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.h3 
+              className="text-3xl font-bold text-[#2297F5]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <Counter end={98} suffix="%" duration={2} />
+            </motion.h3>
+            <p className="text-gray-600">Satisfaction Rate</p>
+          </motion.div>
+          
+          <motion.div 
+            className="bg-blue-50 rounded-lg p-6 text-center"
+            whileHover={{ scale: 1.05, backgroundColor: "#e6f0ff" }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.h3 
+              className="text-3xl font-bold text-[#2297F5]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <Counter end={150} suffix="+" duration={2.2} />
+            </motion.h3>
+            <p className="text-gray-600">Projects Completed</p>
+          </motion.div>
+          
+          <motion.div 
+            className="bg-blue-50 rounded-lg p-6 text-center"
+            whileHover={{ scale: 1.05, backgroundColor: "#e6f0ff" }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.h3 
+              className="text-3xl font-bold text-[#2297F5]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              <Counter end={10} suffix="+" duration={1.5} />
+            </motion.h3>
+            <p className="text-gray-600">Years Experience</p>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
