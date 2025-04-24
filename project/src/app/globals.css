@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+  /* Buttons */
   .btn {
     @apply px-6 py-3 h-[50px] text-lg rounded-lg font-medium inline-flex items-center justify-center tracking-tight;
   }
@@ -15,14 +16,20 @@
     @apply text-black bg-transparent;
   }
 
-  .logo-ticker-image {
-    @apply h-8 w-auto;
+  /* Cards */
+  .card {
+    @apply p-10 border border-[#222222]/10 rounded-3xl shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full;
   }
 
-  .tag {
-    @apply text-sm inline-flex border border-[#222]/10 px-3 py-1 rounded-lg tracking-tight;
+  .card-title {
+    @apply text-lg font-bold text-gray-800 mb-1;
   }
 
+  .card-description {
+    @apply text-gray-600 mb-3 text-sm;
+  }
+
+  /* Sections */
   .section-title {
     @apply text-center text-3xl md:text-[54px] md:leading-[60px] font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text;
   }
@@ -35,11 +42,7 @@
     @apply max-w-[540px] mx-auto;
   }
 
-  .card {
-    @apply p-10 border border-[#222222]/10 rounded-3xl shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full;
-  }
-
-/* Typing Animation */
+  /* Animations */
   .typing-animation {
     @apply inline-block overflow-hidden whitespace-nowrap border-r-2 border-[#032854];
     animation: typing 4s steps(12, end) infinite, blink 0.5s step-end infinite;
@@ -66,31 +69,26 @@
       border-color: #032854;
     }
   }
-  html {
-    scroll-behavior: smooth;
-  }
-  .bg-radial-blue-gradient {
-    background: radial-gradient(ellipse 200% 100% at bottom left, #183EC2, #EAEEFE 100%);
-    /* Adding flex properties and padding */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 2rem;  /* pt-8 equivalent */
-    padding-bottom: 2rem;  /* pb-8 equivalent */
-  }
-  
-  @media (min-width: 780px) {
-    .bg-radial-blue-gradient {
-      padding-top: 3rem;  /* md:pt-12 equivalent */
-      padding-bottom: 3rem;  /* md:pb-12 equivalent */
-    }
-  }
-  
-  .bg-gradient-to-r {
-    background: linear-gradient(to right, rgba(166, 194, 221, 0.3), rgba(183, 204, 221, 1));
-  }
-  
+
+  /* Utilities */
   .overflow-hidden {
     overflow: hidden;
-  }  
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Form Styles */
+  .form-input {
+    @apply w-full mt-1 p-2 border border-gray-300 rounded-lg text-gray-800 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+
+  .form-error {
+    @apply text-red-500 text-xs mt-1;
+  }
 }

@@ -93,17 +93,16 @@ export const CompanyHighlights = () => {
             >
               A Glimpse Into Our Team
             </motion.h2>
-            
             <motion.div 
-              className="h-1 w-24 bg-blue-500 mt-4 rounded-full"
+              className="h-1 w-20 md:w-24 bg-gradient-to-r from-[#2297F5] to-[#F8CD23] mx-auto mt-4 mb-4 md:mb-5 rounded-full"
               initial={{ width: 0 }}
               whileInView={{ width: "6rem" }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.5 }}
             />
-            
+
             <motion.p 
-              className="section-description mt-6 text-xl text-center font-openSans text-gray-600 max-w-2xl"
+              className="text-base md:text-lg text-center font-openSans text-gray-600 max-w-2xl mx-auto mt-6 px-2 md:px-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

@@ -68,7 +68,7 @@ export const CoreValues: React.FC = () => {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 w-full"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 w-full"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -95,7 +95,7 @@ export const CoreValues: React.FC = () => {
           }].map((value, index) => (
             <motion.div
               key={index}
-              className={`bg-gradient-to-br ${value.gradient} text-white rounded-xl flex flex-col items-center justify-between px-6 sm:px-8 py-8 sm:py-10 text-center min-h-[320px] sm:min-h-[350px] overflow-hidden relative`}
+              className={`bg-gradient-to-br ${value.gradient} text-white rounded-xl flex flex-col items-center justify-between px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-10 text-center min-h-[280px] sm:min-h-[320px] md:min-h-[350px] overflow-hidden relative`}
               variants={itemVariants}
               initial="rest"
               whileHover="hover"
@@ -104,8 +104,8 @@ export const CoreValues: React.FC = () => {
               }}
               viewport={{ once: true }}
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-bl-full"></div>
-              <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/5 rounded-tr-full"></div>
+              <div className="absolute top-0 right-0 w-20 h-20 sm:w-24 sm:h-24 bg-white/5 rounded-bl-full"></div>
+              <div className="absolute bottom-0 left-0 w-12 h-12 sm:w-16 sm:h-16 bg-white/5 rounded-tr-full"></div>
 
               <div className="z-10 flex flex-col items-center">
                 <motion.div
@@ -115,14 +115,14 @@ export const CoreValues: React.FC = () => {
                   viewport={{ once: true }}
                   className="text-center"
                 >
-                  <h5 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+                  <h5 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">
                     <span className="text-[#F8CD23]">{value.title}</span>{value.subtitle}
                   </h5>
-                  <div className="w-16 h-1 bg-[#F8CD23] mx-auto mt-2 mb-4 sm:mb-6"></div>
+                  <div className="w-12 sm:w-16 h-1 bg-[#F8CD23] mx-auto mt-2 mb-4 sm:mb-6"></div>
                 </motion.div>
 
                 <motion.p 
-                  className="text-sm sm:text-base font-normal leading-relaxed tracking-wide flex-grow"
+                  className="text-sm sm:text-base md:text-lg font-normal leading-relaxed tracking-wide flex-grow"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 * index, duration: 0.6 }}

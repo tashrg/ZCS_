@@ -231,41 +231,46 @@ export const Testimonials = () => {
       
       {/* Content */}
       <div className="container mx-auto px-4 relative z-10">
-        {/* Title Section with enhanced animations */}
         <div className="text-center mb-24">
-          <motion.div 
+          <motion.span
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-block mb-2 px-4 py-1 bg-blue-100 rounded-full text-blue-600 text-sm font-medium"
+            className="inline-block text-sm font-medium text-blue-600 mb-2 px-4 py-1 bg-blue-50 rounded-full"
           >
-            Client Feedback
-          </motion.div>
-          
+            CLIENT FEEDBACK
+          </motion.span>
+
           <motion.h2
-            className="mt-1 text-4xl md:text-5xl font-bold text-gray-800"
+            className="text-3xl md:text-4xl lg:text-5xl font-montserrat font-bold text-gray-800 mb-3 md:mb-4 px-2"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            What Our <span className="text-[#2297F5]">Clients</span> Say
+            What <span className="text-[#2297F5]">Our Clients</span> Say
           </motion.h2>
-          
+
           <motion.div
-            className="mx-auto mt-4 max-w-2xl"
+            className="w-20 md:w-24 h-1 bg-gradient-to-r from-[#2297F5] to-[#F8CD23] mx-auto mb-4 md:mb-5"
+            initial={{ width: 0 }}
+            whileInView={{ width: "6rem" }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5 }}
+          />
+
+          <motion.p
+            className="text-base md:text-lg text-gray-600 font-openSans max-w-2xl mx-auto px-2 md:px-4 mt-6"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <p className="text-xl text-gray-600">
-              Dont just take our word for it — hear from the people whove experienced our service
-            </p>
-          </motion.div>
+            Don’t just take our word for it — hear from the people who’ve experienced our service.
+          </motion.p>
         </div>
-        
+
         {/* Testimonials Carousel - adjusted to move down */}
         <div 
           className="relative max-w-6xl mx-auto mt-12"

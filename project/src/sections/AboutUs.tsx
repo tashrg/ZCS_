@@ -31,36 +31,38 @@ export const AboutUs: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.h1
-            className="section-title text-4xl md:text-5xl font-montserrat font-bold mt-1 text-[#2297F5]"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            About Us
-          </motion.h1>
+        <motion.h1
+              className="text-3xl md:text-4xl lg:text-5xl font-montserrat font-bold text-gray-800 mb-3 md:mb-4 px-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              About <span className="text-[#2297F5]">Us</span>
+            </motion.h1>
 
-          <motion.div
-            className="w-24 h-1 bg-[#F8CD23] mx-auto mt-4 mb-4"
-            initial={{ width: 0 }}
-            whileInView={{ width: 96 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5 }}
-          ></motion.div>
+            {/* Gradient Divider */}
+            <motion.div
+              className="w-20 md:w-24 h-1 bg-gradient-to-r from-[#F8CD23] to-[#2297F5] mx-auto mt-4 mb-4"
+              initial={{ width: 0 }}
+              whileInView={{ width: "6rem" }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.5 }}
+            />
 
-          <motion.p
-            className="text-xl text-center font-montserrat text-[#032854]"
-            custom={1}
-            variants={textVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            These are the services that ZCS Offers
-          </motion.p>
-        </motion.div>
-      </div>
+            {/* Description */}
+            <motion.p
+              className="text-base md:text-lg text-gray-700 font-montserrat max-w-2xl mx-auto px-2 md:px-4 mt-6 text-center"
+              custom={1}
+              variants={textVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              These are the services that ZCS offers.
+            </motion.p>
+          </motion.div>
+        </div>
 
       {/* Full-width parallax image section */}
       <motion.div

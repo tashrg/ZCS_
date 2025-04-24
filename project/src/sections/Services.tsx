@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { createPortal } from "react-dom";
+
 
 interface FlipCardProps {
   frontText: string;
@@ -271,8 +271,8 @@ export const Services = () => {
           </motion.div>
         </AnimatePresence>
 
-                {/* Tablet and Desktop view - grid layout with last card aligned center column */}
-                <AnimatePresence mode="wait">
+        {/* Tablet and Desktop view - grid layout with last card aligned center column */}
+        <AnimatePresence mode="wait">
           <motion.div 
             key={selectedCategory || "all-desktop"}
             className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8"
